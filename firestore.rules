@@ -1,0 +1,207 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// rules_version = '2';
+// service cloud.firestore {
+//   match /databases/{database}/documents {
+
+//     match /{document=**} {
+//       allow read, write: if false;
+//     }
+    
+//     match /messages/{docId} {
+//  			allow read: if request.auth.uid != null;
+//       allow create: if canCreateMessage();
+//     }
+    
+//   	function canCreateMessage() {
+//       let isSignedIn = request.auth.uid != null;
+//       let isOwner = request.auth.uid == request.resource.data.uid;
+//       let isNotTooLong = request.resource.data.text.size() < 255;
+//       let isNow = request.time == request.resource.data.createdAt;
+
+//       let isNotBanned = exists(
+//       	/databases/$(database)/documents/banned/$(request.auth.uid)
+//       ) == false;
+      
+//       return isSignedIn && isOwner && isNotTooLong && isNow && isNotBanned;
+//     }
+    
+//   }
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// rules_version = '2';
+// service cloud.firestore {
+//   match /databases/{database}/documents {
+
+//     match /todos/{docId} {
+ 
+//       allow create: if isLoggedIn() && hasProfile(request.auth.uid)
+
+ 
+//       allow delete: if isLoggedIn() && isAdmin(request.auth.uid)
+//     }
+
+
+//     function isLoggedIn() { 
+//       return request.auth.uid != null;
+//     }
+
+//     function hasProfile(uid) {
+//         return exists(/databases/$(database)/documents/users/$(uid))
+//     }
+
+//     function isAdmin(uid) {
+//       let profile = get(/databases/$(database)/documents/users/$(uid))
+
+//       return profile.data.admin == true
+//     }
+ 
+
+
+    
+
+//   }
+// }
+
+
+
+
+
+
+    // match /users/{userId} {
+
+    //   allow read: if isLoggedIn();
+    //   allow write: if belongsTo(userId);
+
+    // }
+
+    // match /todos/{docId} {
+
+    //   allow read: if resource.data.status == 'published';
+
+    //   allow create: if canCreateTodo();
+                    
+
+    //   allow update: if belongsTo() 
+    //                 && request.resource.data.keys().hasOnly(['text', 'status']);
+    // }
+
+    // function isLoggedIn() { 
+    //   return request.auth.uid != null;
+    // }
+
+    // function belongsTo(userId) {    
+    //   return request.auth.uid == userId || request.auth.uid == resource.data.uid;
+    // }
+
+    // function canCreateTodo() {
+    //   let uid = request.auth.uid;
+    //   let hasValidTimestamp = request.time == request.resource.data.createdAt;
+
+    //   return belongsTo(uid) && hasValidTimestamp;
+    // }
+    
+
+
+
+
+
+
+
+
+
+  //  match /users/{userId} {
+
+  //     allow read: if request.auth.uid != null;
+  //     allow write: if request.auth.uid == userId;
+
+  //   }
+
+  //   match /todos/{docId} {
+
+  //     allow read: if resource.data.status == 'published';
+
+  //     allow create: if request.auth.uid == resource.data.uid 
+  //                   && request.time == request.resource.data.createdAt;
+                    
+
+  //     allow update: if request.auth.uid == resource.data.uid 
+  //                   && request.resource.data.keys().hasOnly(['text', 'status']);
+  //   }
+    
+
+
+
+    // match /users/someId {
+    //   // Single document
+    // }
+    
+    // match /users/{docId} {
+    //   // Single Collection
+    // }
+
+    // match /users/{docId=**} {
+    //   // Recursive wildcard, includes all subcollections
+    // }
+
+
+
+  // match /users/{docId=**} {
+
+  //     allow read, write;
+
+  //     allow get;
+  //     allow list;
+
+  //     allow create;
+  //     allow update;
+  //     allow delete;
+      
+  //   }
