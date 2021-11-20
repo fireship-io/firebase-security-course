@@ -17,7 +17,6 @@ service cloud.firestore {
         allow delete: if hasAnyRole(['admin']);
     }
 
-
     function isSignedIn() {
       return request.auth != null;
     }
@@ -39,11 +38,10 @@ service cloud.firestore {
     function isValidUpdatedPost() {
       let post = request.resource.data;
       let hasRequiredFields = post.keys().hasAny(['content', 'updatedAt', 'published']);
-      let isValidContent = post.content is string && post.content.size() < 5000;
+      let isValidContent = !('content' in post) || post.content is string && post.content.size() < 5000;
 
       return hasRequiredFields && isValidContent;
     }
-    
   }
 }
 
